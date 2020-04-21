@@ -201,5 +201,9 @@ class InputConnectionController implements TextInputClient {
       _sentRemoteValues.clear();
     }
   }
+
+  @override
+  // TODO: implement currentAutofillScope
+  AutofillScope get currentAutofillScope => null;
 }
 
