@@ -159,8 +159,15 @@ class InputConnectionController implements TextInputClient {
   }
 
   @override
+  AutofillScope get currentAutofillScope => null; //AutofillGroup.of(context);
+  
+  @override
   TextEditingValue get currentTextEditingValue =>
       _lastKnownRemoteTextEditingValue;
+      
+  void showAutocorrectionPromptRect(int start, int end) {
+    // TODO: implement showAutocorrectionPromptRect
+  }
 
   @override
   void updateFloatingCursor(RawFloatingCursorPoint point) {
