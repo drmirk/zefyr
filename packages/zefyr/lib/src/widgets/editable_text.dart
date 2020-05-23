@@ -192,8 +192,7 @@ class _ZefyrEditableTextState extends State<ZefyrEditableText>
     super.initState();
     _focusAttachment = _focusNode.attach(context);
     _input = InputConnectionController(_handleRemoteValueChange);
-    _scrollOffset = 0;//_scrollController.offset;
-    _scrollController.addListener(_handleScroll);
+    _scrollController.addListener(_handleScrollChange);
     _updateSubscriptions();
   }
 
@@ -246,7 +245,7 @@ class _ZefyrEditableTextState extends State<ZefyrEditableText>
 
   // ignore: unused_field
   final ScrollController _scrollController = ScrollController();
-  double _scrollOffset;
+  double _scrollOffset = 0.0;
   ZefyrRenderContext _renderContext;
   CursorTimer _cursorTimer;
   InputConnectionController _input;
@@ -308,7 +307,7 @@ class _ZefyrEditableTextState extends State<ZefyrEditableText>
     _renderContext.removeListener(_handleRenderContextChange);
     widget.controller.removeListener(_handleLocalValueChange);
     _focusNode.removeListener(_handleFocusChange);
-    _scrollController.removeListener(_handleScroll);
+    _scrollController.removeListener(_handleScrollChange);
     _input.closeConnection();
     _cursorTimer.stop();
   }
@@ -346,20 +345,16 @@ class _ZefyrEditableTextState extends State<ZefyrEditableText>
     });
   }
 
-  void _handleScroll() {
-    if (_scrollController == null) return;
+  void _handleScrollChange() {
     ScrollDirection scrollDirection = _scrollController.position.userScrollDirection;
-    double currentOffset = _scrollController.offset;
-    double maxOffset = _scrollController.position.maxScrollExtent;
-
     if (scrollDirection == ScrollDirection.idle && widget.controller.selection.isCollapsed) {
       if (widget.controller.document.length - 1 == widget.controller.selection.end) {
-        _scrollController.jumpTo(maxOffset);
+        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
       } else {
         _scrollController.jumpTo(_scrollOffset);
       }
     } else {
-      _scrollOffset = currentOffset;
+      _scrollOffset = _scrollController.offset;
     }
   }
 }
