@@ -192,7 +192,7 @@ class InputConnectionController implements TextInputClient {
     // TODO: implement updateFloatingCursor
   }
 
-
+  @override
   void connectionClosed() {
     if (hasConnection) {
       _textInputConnection.connectionClosedReceived();
