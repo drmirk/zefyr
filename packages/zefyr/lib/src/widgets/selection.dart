@@ -614,7 +614,9 @@ class _SelectionToolbarState extends State<_SelectionToolbar> {
         block.preferredLineHeight,
         midpoint,
         endpoints,
-        widget.selectionOverlay);
+        widget.selectionOverlay,
+        null,
+    );
     return CompositedTransformFollower(
       link: block.layerLink,
       showWhenUnlinked: false,
