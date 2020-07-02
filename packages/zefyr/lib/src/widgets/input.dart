@@ -172,13 +172,6 @@ class InputConnectionController implements TextInputClient {
     // TODO: implement showAutocorrectionPromptRect
   }
 
-  @override
-  AutofillScope get currentAutofillScope => null; //AutofillGroup.of(context);
-  
-  @override
-  TextEditingValue get currentTextEditingValue =>
-      _lastKnownRemoteTextEditingValue;
-
   //
   // Private members
   //
@@ -201,12 +194,5 @@ class InputConnectionController implements TextInputClient {
       _sentRemoteValues.clear();
     }
   }
-
-  //
-  // Private members
-  //
-
-  final List<TextEditingValue> _sentRemoteValues = [];
-  TextInputConnection _textInputConnection;
-  TextEditingValue _lastKnownRemoteTextEditingValue;
+  
 }
